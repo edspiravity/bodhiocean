@@ -1,27 +1,151 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* =========================
+   BodhiOcean Design Tokens
+   ========================= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Fonts (set by next/font in <html class="...">) */
+  --font-body: var(--font-sans);
+  --font-title: var(--font-sans);
+
+  /* Base (Light) */
+  --bg: 255 255 255;
+  --fg: 17 24 39;          /* slate-900-ish */
+  --muted: 100 116 139;    /* slate-500-ish */
+  --border: 226 232 240;   /* slate-200-ish */
+
+  /* Accents */
+  /* --ocean: 26 95 122;      /* ocean blue */
+  --ocean: 0 122 145;
+  --bodhi: 107 168 126;    /* bodhi green */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* Dark mode support (now actually affects your site) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: 10 10 10;
+    --fg: 237 237 237;
+    --muted: 163 163 163;
+    --border: 63 63 70;
+
+    /* Optional: slightly brighter accents in dark mode */
+    /*--ocean: 56 140 170;*/
+    --ocean: 120 180 201;
+    --bodhi: 127 191 157;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-family: var(--font-body);
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.page-fade {
+  animation: pageFadeIn 240ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-fade { animation: none; }
+}
+
+
+/* Links */
+a {
+  color: rgb(var(--ocean));
+}
+a:hover {
+  opacity: 0.9;
+}
+
+/* Long-form reading */
+.prose {
+  --tw-prose-body: rgb(var(--fg));
+  --tw-prose-headings: rgb(var(--fg));
+  --tw-prose-links: rgb(var(--ocean));
+  --tw-prose-bold: rgb(var(--fg));
+  --tw-prose-quotes: rgb(var(--fg));
+  --tw-prose-quote-borders: rgb(var(--border));
+  --tw-prose-captions: rgb(var(--muted));
+  --tw-prose-code: rgb(var(--fg));
+  --tw-prose-pre-bg: rgb(248 250 252);
+}
+
+.prose :where(h1, h2, h3) {
+  font-family: var(--font-title);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.prose :where(h1) { line-height: 1.15; }
+.prose :where(h2) { line-height: 1.2; }
+
+/* In dark mode, make code blocks match better */
+@media (prefers-color-scheme: dark) {
+  .prose {
+    --tw-prose-pre-bg: rgb(24 24 27);
+  }
+}
+
+/* =========================
+   Subtle Ocean Animation
+   ========================= */
+@keyframes oceanBreath {
+  0% { transform: translateY(0px); opacity: 0.35; }
+  50% { transform: translateY(6px); opacity: 0.5; }
+  100% { transform: translateY(0px); opacity: 0.35; }
+}
+
+@keyframes oceanDrift {
+  0%   { background-position: 0% 50%; opacity: 0.30; }
+  50%  { background-position: 100% 50%; opacity: 0.55; }
+  100% { background-position: 0% 50%; opacity: 0.30; }
+}
+
+.ocean-breath {
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* Ensure all content sits ABOVE the glow */
+.ocean-breath > * {
+  position: relative;
+  z-index: 1;
+}
+
+/*.ocean-breath::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(
+    closest-side,
+    rgb(var(--ocean) / 0.14),
+    transparent 70%
+  );
+  filter: blur(10px);
+  animation: oceanDrift 10s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}*/
+
+.ocean-breath::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgb(var(--ocean) / 0.22),
+    transparent 45%,
+    rgb(var(--bodhi) / 0.16)
+  );
+  background-size: 200% 200%;
+  animation: oceanDrift 10s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
 }

@@ -13,31 +13,39 @@ export default function SutraNotesIndex() {
         </p>
       </header>
 
-      {posts.length === 0 ? (
-        <div className="rounded-2xl border p-5 opacity-80">
-          No sutra notes yet.
-        </div>
-      ) : (
-        <ul className="space-y-4">
-          {posts.map((p) => (
-            <li key={p.slug} className="rounded-2xl border p-5">
+      <ul className="space-y-6">
+        {posts.map((p) => (
+          <li
+            key={p.slug}
+            className="rounded-2xl border p-4 transition-colors duration-200 hover:bg-black/2 dark:hover:bg-white/2"
+            style={{ borderColor: "rgb(var(--border))" }}
+          >
+            <Link href={`/sutra-notes/${p.slug}`} className="block">
               <div className="text-sm opacity-70">{p.date}</div>
-              <Link className="text-lg font-semibold" href={`/sutra-notes/${p.slug}`}>
-                {p.title}
-              </Link>
+              <div className="text-base font-medium">{p.title}</div>
+
               {p.tags?.length ? (
                 <div className="mt-2 flex flex-wrap gap-2">
                   {p.tags.map((t) => (
-                    <span key={t} className="rounded-full border px-2 py-0.5 text-xs opacity-80">
+                    <span
+                      key={t}
+                      className="rounded-full px-2.5 py-1 text-xs"
+                      style={{
+                        color: "rgb(var(--ocean))",
+                        background: "rgb(var(--ocean) / 0.08)",
+                        border: "1px solid rgb(var(--ocean) / 0.05)",
+                      }}
+                    >
                       {t}
                     </span>
                   ))}
                 </div>
               ) : null}
-            </li>
-          ))}
-        </ul>
-      )}
+            </Link>
+          </li>
+        ))}
+      </ul>
+
     </div>
   );
 }

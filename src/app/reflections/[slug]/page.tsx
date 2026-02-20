@@ -31,14 +31,17 @@ export default async function ReflectionPage({
   return (
     <div className="space-y-6">
       <div className="text-sm">
-        <Link className="opacity-80 hover:opacity-100" href="/reflections">
-          ← Back to Reflections
+        <Link className="inline-flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity" href="/reflections">
+          <span aria-hidden>←</span>
+          <span className="underline underline-offset-4 decoration-transparent hover:decoration-current transition-[text-decoration-color]">
+            Back to Reflections
+          </span>
         </Link>
       </div>
 
-      <header className="space-y-2">
-        {dateNice ? <div className="text-sm opacity-70">{dateNice}</div> : null}
-        <h1 className="text-3xl font-semibold">{title}</h1>
+      <header className="space-y-3">
+        {dateNice ? (<div className="text-xs uppercase tracking-wide opacity-60">{dateNice}</div>) : null}
+        <h1 className="text-4xl font-medium leading-tight" style={{ fontFamily: "var(--font-title)" }}>{title}</h1>
       </header>
 
       <article className="prose prose-neutral max-w-none">
