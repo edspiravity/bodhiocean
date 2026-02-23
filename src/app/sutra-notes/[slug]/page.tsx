@@ -11,6 +11,25 @@ export function generateStaticParams() {
   return getAllSutraNotes().map((p) => ({ slug: p.slug }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const post = getReflectionBySlug(params.slug);
+
+  return {
+    title: post.title,
+    description: post.excerpt ?? post.title,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt ?? post.title,
+      type: "article",
+      url: `/sutra-notes/${params.slug}`,
+    },
+  };
+}
+
 export default async function SutraNotePage({
   params,
 }: {

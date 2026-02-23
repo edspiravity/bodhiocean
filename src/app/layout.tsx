@@ -19,8 +19,48 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Bodhi Ocean",
-  description: "A lay practitioner's reflection journal — mindfulness, clarity, and the path of awakening.",
+  metadataBase: new URL("https://bodhiocean.com"),
+
+  title: {
+    default: "Bodhi Ocean",
+    template: "%s | Bodhi Ocean",
+  },
+
+  description:
+    "A quiet journal of practice — reflections, sutra notes, and contemplations from daily life as a lay practitioner.",
+
+  keywords: [
+    "Buddhism",
+    "mindfulness",
+    "sutra notes",
+    "Buddhist reflections",
+    "lay practitioner",
+  ],
+
+  authors: [{ name: "Bodhi Ocean" }],
+  creator: "Bodhi Ocean",
+
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://bodhiocean.com",
+    siteName: "Bodhi Ocean",
+    title: "Bodhi Ocean",
+    description:
+      "A quiet journal of practice — reflections and sutra encounters.",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Bodhi Ocean",
+    description:
+      "A quiet journal of practice — reflections and sutra encounters.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

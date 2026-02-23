@@ -11,6 +11,25 @@ export function generateStaticParams() {
   return getAllReflections().map((p) => ({ slug: p.slug }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const post = getReflectionBySlug(params.slug);
+
+  return {
+    title: post.title,
+    description: post.excerpt ?? post.title,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt ?? post.title,
+      type: "article",
+      url: `/reflections/${params.slug}`,
+    },
+  };
+}
+
 export default async function ReflectionPage({
   params,
 }: {
