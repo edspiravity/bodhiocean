@@ -36,3 +36,38 @@ export function getAllReflections(): ReflectionMeta[] {
 export function getReflectionPathBySlug(slug: string) {
   return path.join(reflectionsDir, `${slug}.mdx`);
 }
+
+export type ReflectionPost = {
+  meta: ReflectionMeta;
+  content: string;
+  excerpt: string;
+};
+
+function makeExcerpt(content: string, maxLen = 160) {
+  const plain = content
+    .replace(/```[\s\S]*?```/g, "") // remove code blocks
+    .replace(/<\/?[^>]+(>|$)/g, "") // strip any html
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return plain.length > maxLen ? plain.slice(0, maxLen - 1) + "…" : plain;
+}
+
+export function getReflectionBySlug(slug: string): ReflectionPost {
+  const fullPath = getReflectionPathBySlug(slug);
+  const raw = fs.readFileSync(fullPath, "utf8");
+  const { data, content } = matter(raw);
+
+  const meta: ReflectionMeta = {
+    title: (data.title as string) ?? slug,
+    date: (data.date as string) ?? "1970-01-01",
+    tags: (data.tags as string[]) ?? [],
+    slug,
+  };
+
+  return {
+    meta,
+    content,
+    excerpt: (data.excerpt as string) ?? makeExcerpt(content),
+  };
+}

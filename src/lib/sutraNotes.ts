@@ -37,3 +37,39 @@ export function getAllSutraNotes(): SutraNoteMeta[] {
 export function getSutraNotePathBySlug(slug: string) {
   return path.join(sutraDir, `${slug}.mdx`);
 }
+
+
+export type SutraNotePost = {
+  meta: SutraNoteMeta;
+  content: string;
+  excerpt: string;
+};
+
+function makeExcerpt(content: string, maxLen = 160) {
+  const plain = content
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/<\/?[^>]+(>|$)/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return plain.length > maxLen ? plain.slice(0, maxLen - 1) + "…" : plain;
+}
+
+export function getSutraNoteBySlug(slug: string): SutraNotePost {
+  const fullPath = getSutraNotePathBySlug(slug);
+  const raw = fs.readFileSync(fullPath, "utf8");
+  const { data, content } = matter(raw);
+
+  const meta: SutraNoteMeta = {
+    title: (data.title as string) ?? slug,
+    date: (data.date as string) ?? "1970-01-01",
+    tags: (data.tags as string[]) ?? [],
+    slug,
+  };
+
+  return {
+    meta,
+    content,
+    excerpt: (data.excerpt as string) ?? makeExcerpt(content),
+  };
+}
