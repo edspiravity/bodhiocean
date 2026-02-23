@@ -14,9 +14,11 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = getReflectionBySlug(params.slug);
+  const { slug } = await params;
+
+  const post = getReflectionBySlug(slug);
 
   return {
     title: post.meta.title,
@@ -25,7 +27,7 @@ export async function generateMetadata({
       title: post.meta.title,
       description: post.excerpt ?? post.meta.title,
       type: "article",
-      url: `/reflections/${params.slug}`,
+      url: `/reflections/${slug}`,
     },
   };
 }
