@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { format, parseISO } from "date-fns";
-import { getAllSutraNotes, getSutraNotePathBySlug, getReflectionBySlug } from "@/lib/sutraNotes";
+import { getAllSutraNotes, getSutraNotePathBySlug, getSutraNoteBySlug } from "@/lib/sutraNotes";
 import { SutraQuote } from "@/components/SutraQuote";
 
 export function generateStaticParams() {
@@ -16,7 +16,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }) {
-  const post = getReflectionBySlug(params.slug);
+  const post = getSutraNoteBySlug(params.slug);
 
   return {
     title: post.title,
