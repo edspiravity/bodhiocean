@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { format, parseISO } from "date-fns";
-import { getAllSutraNotes, getSutraNotePathBySlug } from "@/lib/sutraNotes";
+import { getAllSutraNotes, getSutraNotePathBySlug, getReflectionBySlug } from "@/lib/sutraNotes";
 import { SutraQuote } from "@/components/SutraQuote";
 
 export function generateStaticParams() {
