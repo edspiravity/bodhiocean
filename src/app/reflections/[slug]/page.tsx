@@ -19,11 +19,11 @@ export async function generateMetadata({
   const post = getReflectionBySlug(params.slug);
 
   return {
-    title: post.title,
-    description: post.excerpt ?? post.title,
+    title: post.meta.title,
+    description: post.excerpt ?? post.meta.title,
     openGraph: {
-      title: post.title,
-      description: post.excerpt ?? post.title,
+      title: post.meta.title,
+      description: post.excerpt ?? post.meta.title,
       type: "article",
       url: `/reflections/${params.slug}`,
     },

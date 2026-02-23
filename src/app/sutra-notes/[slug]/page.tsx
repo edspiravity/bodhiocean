@@ -19,11 +19,11 @@ export async function generateMetadata({
   const post = getSutraNoteBySlug(params.slug);
 
   return {
-    title: post.title,
-    description: post.excerpt ?? post.title,
+    title: post.meta.title,
+    description: post.excerpt ?? post.meta.title,
     openGraph: {
-      title: post.title,
-      description: post.excerpt ?? post.title,
+      title: post.meta.title,
+      description: post.excerpt ?? post.meta.title,
       type: "article",
       url: `/sutra-notes/${params.slug}`,
     },
