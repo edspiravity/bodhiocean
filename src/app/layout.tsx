@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageFade } from "@/components/PageFade";
 import { NavLink } from "@/components/NavLink";
+import { SutraNotesDropdown } from "@/components/SutraNotesDropdown";
 
 import "./globals.css";
 import { Noto_Sans, Cormorant_Garamond } from "next/font/google";
@@ -68,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${notoSans.variable} ${cormorant.variable}`}>
       <body>
         <div className="min-h-dvh">
-          <header className="mx-auto max-w-3xl px-4 py-8">
+          <header className="mx-auto max-w-5xl px-4 py-8">
             <nav className="flex items-baseline justify-between gap-6">
 {/*              <a
                 href="/"
@@ -83,7 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
               <div className="flex flex-wrap justify-end gap-x-4 gap-y-2 text-sm">
                 <NavLink href="/reflections">Reflections</NavLink>
-                <NavLink href="/sutra-notes">Sutra Notes</NavLink>
+                <SutraNotesDropdown />
                 <NavLink href="/artwork">Artwork</NavLink>
                 <NavLink href="/about">About</NavLink>
               </div>
@@ -91,11 +92,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </nav>
           </header>
 
-          <main className="mx-auto max-w-3xl px-4 pb-20">
+          <main className="mx-auto max-w-5xl px-4 pb-20">
             <PageFade>{children}</PageFade>
           </main>
 
-          <footer className="mx-auto max-w-3xl px-4 py-12 text-sm opacity-70">
+          <footer className="mx-auto max-w-5xl px-4 py-12 text-sm opacity-70">
             <div>© {new Date().getFullYear()} Bodhi Ocean</div>
             <div className="mt-1">
               Personal reflections as a lay practitioner.
