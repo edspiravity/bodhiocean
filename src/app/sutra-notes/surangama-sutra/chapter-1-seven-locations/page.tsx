@@ -3,6 +3,52 @@
 import { useState } from "react";
 import Link from "next/link";
 
+type NoteLink = {
+  title: string;
+  href: string;
+};
+
+function NoteNavigation({
+  previous,
+  next,
+}: {
+  previous?: NoteLink;
+  next?: NoteLink;
+}) {
+  return (
+    <nav
+      aria-label="Sutra note navigation"
+      className="grid grid-cols-2 gap-4 text-sm"
+    >
+      <div>
+        {previous && (
+          <Link
+            href={previous.href}
+            className="group inline-flex flex-col items-start opacity-70 transition-opacity hover:opacity-100"
+          >
+            <span className="font-medium underline decoration-transparent underline-offset-4 transition-[text-decoration-color] group-hover:decoration-current">
+              ← {previous.title}
+            </span>
+          </Link>
+        )}
+      </div>
+
+      <div className="text-right">
+        {next && (
+          <Link
+            href={next.href}
+            className="group inline-flex flex-col items-end opacity-70 transition-opacity hover:opacity-100"
+          >
+            <span className="font-medium underline decoration-transparent underline-offset-4 transition-[text-decoration-color] group-hover:decoration-current">
+              {next.title} →
+            </span>
+          </Link>
+        )}
+      </div>
+    </nav>
+  );
+}
+
 type TextContent = string | string[];
 
 type LocationNote = {
@@ -260,8 +306,8 @@ export default function SurangamaSevenLocationsPage() {
     locations.find((location) => location.id === activeTab) ?? locations[0];
 
   return (
-    <div className="space-y-8">
-      <div className="text-sm">
+    <div className="space-y-4">
+      <div className="text-sm space-y-4">
         <Link
           href="/sutra-notes/surangama-sutra"
           className="inline-flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity"
@@ -271,6 +317,12 @@ export default function SurangamaSevenLocationsPage() {
             Back to Śūraṅgama Sutra Notes
           </span>
         </Link>
+        <NoteNavigation
+          next={{
+            title: "Chapter 1.2 — The Two Foundations",
+            href: "/sutra-notes/surangama-sutra/chapter-1-two-foundations",
+          }}
+        />
       </div>
       <main className="min-h-screen rounded-2xl bg-[rgb(var(--sutra-paper))] px-5 py-12 text-slate-900 md:px-8">
         <article className="mx-auto max-w-5xl">
@@ -488,7 +540,15 @@ export default function SurangamaSevenLocationsPage() {
           </section>
         </article>
       </main>
-      <div className="pt-8 text-sm">
+    <div className="text-sm space-y-4">
+      <NoteNavigation
+        next={{
+          title: "Chapter 1.2 — The Two Foundations",
+          href: "/sutra-notes/surangama-sutra/chapter-1-two-foundations",
+        }}
+      />
+
+      <div>
         <Link
           href="/sutra-notes/surangama-sutra"
           className="inline-flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity"
@@ -499,6 +559,7 @@ export default function SurangamaSevenLocationsPage() {
           </span>
         </Link>
       </div>
+    </div>
   </div>
   );
 }
