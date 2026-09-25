@@ -33,6 +33,20 @@ export const sutraNotes: SutraItem[] = [
         href: "/sutra-notes/surangama-sutra/chapter-1-two-foundations",
         status: "published",
       },
+      {
+        title: "Chapter 1.3 — The Guest Mistaken as the Host",
+        description:
+          "Notes on the Buddha’s teaching on the guest mistaken as the host — Recognize what you have mistakenly taken to be your fundamental mind.",
+        href: "/sutra-notes/surangama-sutra/chapter-1-guest-mistaken-as-host",
+        status: "published",
+      },
+      {
+        title: "Chapter 1.4 — Finding the Host",
+        description:
+          "Notes on the Buddha’s teaching on the finding the host — Distinguishing what changes from what is not carried along by those changes.",
+        href: "/sutra-notes/surangama-sutra/chapter-1-finding-the-host",
+        status: "published",
+      },
     ],
   },
 ];

@@ -1,5 +1,11 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 
+export const metadata = {
+  title: "Śūraṅgama Sutra Chapter 1.2 Notes — The Two Foundations",
+  description:
+    "Buddha’s teaching on the two foundations — Birth and Death vs. Bodhi and Nirvana.",
+};
 type NoteLink = {
   title: string;
   href: string;
@@ -125,6 +131,10 @@ export default function SurangamaTwoFoundationsPage() {
             title: "Chapter 1.1 — The Seven Locations of the Mind",
             href: "/sutra-notes/surangama-sutra/chapter-1-seven-locations",
           }}
+          next={{
+            title: "Chapter 1.3 — The Guest Mistaken as the Host",
+            href: "/sutra-notes/surangama-sutra/chapter-1-guest-mistaken-as-host",
+          }}
         />
       </div>
 
@@ -133,7 +143,7 @@ export default function SurangamaTwoFoundationsPage() {
           {/* Header */}
           <header className="mb-12 text-center">
             <p className="mb-3 text-sm uppercase tracking-[0.25em] text-slate-500">
-              Surangama Sutra · Chapter 1 Notes
+              Śūraṅgama Sutra · Chapter 1.2 Notes
             </p>
 
             <h1 className="text-3xl font-semibold tracking-tight md:text-5xl">
@@ -662,6 +672,10 @@ export default function SurangamaTwoFoundationsPage() {
           previous={{
             title: "Chapter 1.1 — The Seven Locations of the Mind",
             href: "/sutra-notes/surangama-sutra/chapter-1-seven-locations",
+          }}
+          next={{
+            title: "Chapter 1.3 — The Guest Mistaken as the Host",
+            href: "/sutra-notes/surangama-sutra/chapter-1-guest-mistaken-as-host",
           }}
         />
 
